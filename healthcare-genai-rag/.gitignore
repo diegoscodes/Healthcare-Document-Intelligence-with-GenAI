@@ -1,13 +1,15 @@
 # Python
 __pycache__/
 *.py[cod]
+
+# Virtual environments
 .venv/
 
-# Env / secrets
+# Secrets
 .env
 
-# Local data
+# Local generated data
 data/uploads/
 
-# Alembic cache
-alembic/**/*.pyc
+# IDE
+.idea/
