@@ -1,0 +1,148 @@
+🟢 NOME DO PROJETO (RECOMENDADO)
+MediRAG
+
+Healthcare Document Intelligence with GenAI
+
+“From complex healthcare documents to structured, actionable data.”
+
+Curto, profissional, fácil de lembrar e claramente ligado a:
+
+Medicine
+
+RAG
+
+Healthcare AI
+
+🔵 ALTERNATIVAS (caso queira variar)
+
+HealthDocAI – mais direto, menos técnico
+
+PharmaRAG – mais focado em pharma (menos genérico)
+
+👉 Para vagas de Healthcare + GenAI, MediRAG é o mais equilibrado.
+
+📘 RESUMO OFICIAL DO PROJETO
+🔹 O que é o MediRAG?
+
+MediRAG é um sistema de Document Intelligence baseado em GenAI, projetado para processar, compreender e estruturar documentos complexos da área de saúde e farmacêutica, como:
+
+Pharmacy Agreements
+
+Prior Authorizations
+
+Clinical & Administrative Healthcare Documents
+
+O sistema utiliza Large Language Models (LLMs) combinados com Retrieval-Augmented Generation (RAG) para transformar documentos não estruturados (PDFs, textos longos) em dados estruturados, confiáveis e auditáveis.
+
+🔹 O que o programa faz (funcionalmente)
+
+O MediRAG executa um pipeline completo de produção, incluindo:
+
+Upload e ingestão de documentos médicos
+
+PDFs e textos complexos
+
+Limpeza, chunking e normalização
+
+Indexação semântica
+
+Geração de embeddings
+
+Armazenamento vetorial para recuperação eficiente
+
+RAG Pipeline
+
+Recupera trechos relevantes do documento
+
+Envia contexto controlado para o LLM
+
+Reduz alucinação e melhora precisão
+
+Extração estruturada
+
+Converte texto em JSON validado
+
+Exemplos:
+
+Nome do medicamento
+
+Regras de elegibilidade
+
+Datas, limites, aprovações
+
+Restrições clínicas ou administrativas
+
+Persistência em banco de dados (SQL)
+
+Histórico de documentos
+
+Metadados
+
+Resultados de extração
+
+Versionamento
+
+API backend profissional
+
+Construída em FastAPI
+
+Endpoints claros e documentados
+
+Pronta para integração com outros sistemas
+
+Interface React simples
+
+Visualização do documento
+
+Revisão humana dos dados extraídos
+
+Feedback loop (human-in-the-loop)
+
+🔹 Objetivos do projeto
+🎯 Objetivo técnico
+
+Demonstrar domínio prático de:
+
+Python backend (FastAPI)
+
+SQL aplicado a sistemas de IA
+
+RAG pipelines
+
+Prompt engineering para extração estruturada
+
+Arquitetura limpa e escalável
+
+Boas práticas para ambientes regulados
+
+🎯 Objetivo profissional
+
+Criar um projeto de portfólio realista, alinhado a vagas de:
+
+Python Developer (AI-enabled)
+
+GenAI Engineer
+
+Machine Learning Engineer (Applied)
+
+Healthcare / Pharma Tech roles
+
+👉 Algo que você consiga explicar em uma entrevista técnica, não só mostrar no GitHub.
+
+🎯 Objetivo de negócio (visão produto)
+
+Simular um sistema que:
+
+Reduz tempo manual de leitura de documentos
+
+Minimiza erros humanos
+
+Melhora acesso de pacientes a medicação
+
+Aumenta eficiência operacional em healthcare
+
+🧠 Como um recrutador vai ler isso
+
+“Esse candidato não só sabe IA — ele sabe aplicar IA em um contexto regulado e real.”
+
+Isso te coloca acima da média imediatamente.

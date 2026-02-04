@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: healthcare_genai_rag_db
+    environment:
+      POSTGRES_DB: meditrag
+      POSTGRES_USER: meditrag_user
+      POSTGRES_PASSWORD: Parola37
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
