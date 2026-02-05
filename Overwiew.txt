@@ -1,148 +1,72 @@
-🟢 NOME DO PROJETO (RECOMENDADO)
-MediRAG
+Project Name MediRAG
 
 Healthcare Document Intelligence with GenAI
 
-“From complex healthcare documents to structured, actionable data.”
-
-Curto, profissional, fácil de lembrar e claramente ligado a:
-
-Medicine
-
-RAG
-
-Healthcare AI
-
-🔵 ALTERNATIVAS (caso queira variar)
-
-HealthDocAI – mais direto, menos técnico
-
-PharmaRAG – mais focado em pharma (menos genérico)
-
-👉 Para vagas de Healthcare + GenAI, MediRAG é o mais equilibrado.
-
-📘 RESUMO OFICIAL DO PROJETO
-🔹 O que é o MediRAG?
-
-MediRAG é um sistema de Document Intelligence baseado em GenAI, projetado para processar, compreender e estruturar documentos complexos da área de saúde e farmacêutica, como:
-
-Pharmacy Agreements
-
-Prior Authorizations
-
-Clinical & Administrative Healthcare Documents
-
-O sistema utiliza Large Language Models (LLMs) combinados com Retrieval-Augmented Generation (RAG) para transformar documentos não estruturados (PDFs, textos longos) em dados estruturados, confiáveis e auditáveis.
-
-🔹 O que o programa faz (funcionalmente)
-
-O MediRAG executa um pipeline completo de produção, incluindo:
-
-Upload e ingestão de documentos médicos
-
-PDFs e textos complexos
-
-Limpeza, chunking e normalização
-
-Indexação semântica
-
-Geração de embeddings
-
-Armazenamento vetorial para recuperação eficiente
-
-RAG Pipeline
-
-Recupera trechos relevantes do documento
-
-Envia contexto controlado para o LLM
-
-Reduz alucinação e melhora precisão
-
-Extração estruturada
-
-Converte texto em JSON validado
-
-Exemplos:
-
-Nome do medicamento
-
-Regras de elegibilidade
-
-Datas, limites, aprovações
-
-Restrições clínicas ou administrativas
-
-Persistência em banco de dados (SQL)
-
-Histórico de documentos
-
-Metadados
-
-Resultados de extração
-
-Versionamento
-
-API backend profissional
-
-Construída em FastAPI
-
-Endpoints claros e documentados
-
-Pronta para integração com outros sistemas
-
-Interface React simples
-
-Visualização do documento
-
-Revisão humana dos dados extraídos
-
-Feedback loop (human-in-the-loop)
-
-🔹 Objetivos do projeto
-🎯 Objetivo técnico
-
-Demonstrar domínio prático de:
-
-Python backend (FastAPI)
-
-SQL aplicado a sistemas de IA
-
-RAG pipelines
-
-Prompt engineering para extração estruturada
-
-Arquitetura limpa e escalável
-
-Boas práticas para ambientes regulados
-
-🎯 Objetivo profissional
-
-Criar um projeto de portfólio realista, alinhado a vagas de:
-
-Python Developer (AI-enabled)
-
-GenAI Engineer
-
-Machine Learning Engineer (Applied)
-
-Healthcare / Pharma Tech roles
-
-👉 Algo que você consiga explicar em uma entrevista técnica, não só mostrar no GitHub.
-
-🎯 Objetivo de negócio (visão produto)
-
-Simular um sistema que:
-
-Reduz tempo manual de leitura de documentos
-
-Minimiza erros humanos
-
-Melhora acesso de pacientes a medicação
-
-Aumenta eficiência operacional em healthcare
-
-🧠 Como um recrutador vai ler isso
-
-“Esse candidato não só sabe IA — ele sabe aplicar IA em um contexto regulado e real.”
-
-Isso te coloca acima da média imediatamente.
+From complex healthcare documents to structured, actionable data.
+
+For Healthcare + GenAI roles, MediRAG is the most balanced option.
+
+Project Overview
+What is MediRAG?
+MediRAG is a GenAI-based Document Intelligence system designed to process, understand, and structure complex healthcare and pharmaceutical documents such as:
+- Pharmacy Agreements
+- Prior Authorizations
+- Clinical and Administrative Healthcare Documents
+
+It combines Large Language Models (LLMs) with Retrieval-Augmented Generation (RAG) to transform unstructured documents (PDFs, long-form text) into structured, reliable, and auditable data.
+
+What the system does (functional scope)
+MediRAG runs an end-to-end production-style pipeline, including:
+- Document upload and ingestion (PDFs and complex long-form text)
+- Cleaning, chunking, and normalization
+- Semantic indexing
+- Embedding generation
+- Vector storage for efficient retrieval
+- RAG pipeline:
+  - Retrieves relevant passages from the document
+  - Sends controlled context to the LLM
+  - Reduces hallucination and improves accuracy
+- Structured extraction:
+  - Converts text into validated JSON
+  - Examples:
+    - Medication name
+    - Eligibility rules
+    - Dates, limits, approvals
+    - Clinical or administrative restrictions
+- SQL database persistence:
+  - Document history
+  - Metadata
+  - Extraction results
+  - Versioning
+- Professional backend API:
+  - Built with FastAPI
+  - Clear, documented endpoints
+  - Ready for integration with other systems
+- Simple React interface:
+  - Document viewing
+  - Human review of extracted data
+  - Human-in-the-loop feedback loop
+
+Project Objectives
+Technical objective
+Demonstrate practical proficiency in:
+- Python backend development (FastAPI)
+- SQL for AI-enabled systems
+- RAG pipelines
+- Prompt engineering for structured extraction
+- Clean, scalable architecture
+- Best practices for regulated environments
+
+Professional objective
+Build a realistic portfolio project aligned with roles such as:
+- Python Developer (AI-enabled)
+- GenAI Engineer
+- Machine Learning Engineer (Applied)
+- Healthcare / Pharma Tech roles
+
+Business objective (product vision)
+Simulate a system that:
+- Reduces manual document reading time
+- Minimizes human errors
+- Improves patient access to medication
+- Increases operational efficiency in healthcare
