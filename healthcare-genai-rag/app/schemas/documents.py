@@ -22,3 +22,22 @@ class DocumentReadResponse(BaseModel):
     status: str
     content_type: str
     created_at: datetime
+
+class DocumentProcessResponse(BaseModel):
+    document_id: str
+    status: str
+    pages_processed: int
+    total_chars: int
+
+
+class DocumentPageReadResponse(BaseModel):
+    document_id: str
+    page_number: int
+    text: str | None = None
+
+
+class DocumentPagesReadResponse(BaseModel):
+    document_id: str
+    pages: list[DocumentPageReadResponse]
+    pages_count: int
+    total_chars: int
