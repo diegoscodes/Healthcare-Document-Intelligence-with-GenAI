@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Banner.png" alt="AI Monitoring & Ethics Dashboard Banner" width="100%">
+  <img src="Banner.png" alt="Healthcare Document Intelligence with GenAI (MediRAG)" width="100%">
 </p>
 
 
