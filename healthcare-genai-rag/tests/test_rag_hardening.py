@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.services.rag_pipeline import extract_structured_from_context
+from app.services.rag_rules import extract_structured_from_context
 
 
 def test_hardening_dates_and_period_and_unknown_ids() -> None:

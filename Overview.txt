@@ -1,8 +1,14 @@
+Project Name: MediRAG
+
 Healthcare Document Intelligence with GenAI
 
 From complex healthcare documents to structured, actionable data.
 
+---
 
+## Project Overview
+
+### What is MediRAG?
 MediRAG is a GenAI-based Document Intelligence system designed to process, understand, and structure complex healthcare and pharmaceutical documents such as:
 - Pharmacy Agreements
 - Prior Authorizations
@@ -10,18 +16,61 @@ MediRAG is a GenAI-based Document Intelligence system designed to process, under
 
 It combines Large Language Models (LLMs) with Retrieval-Augmented Generation (RAG) to transform unstructured documents (PDFs, long-form text) into structured, reliable, and auditable data.
 
+---
 
+## Current Status (Backend MVP)
+Implemented and working today:
+- Professional backend API (FastAPI) with documented endpoints
+- PostgreSQL persistence (SQLAlchemy + Alembic migrations)
+- PDF upload + file persistence
+- Per-page text extraction and storage (evidence layer)
+- Page listing and single-page retrieval
+- Document serving (inline preview + download)
+- Semantic indexing to Weaviate:
+  - split pages into chunks
+  - generate embeddings
+  - store vectors + metadata for retrieval
+
+---
+
+## Functional Scope (Implemented vs Planned)
+
+### Implemented
+- Document upload and ingestion (PDF)
+- Page-level parsing (evidence)
+- Chunking + embedding generation for indexing
+- Vector storage (Weaviate Cloud)
+- Backend API ready for integration
+
+### Planned / Next
+- RAG question-answering endpoint using retrieved chunks
+- Structured extraction to validated JSON (Pydantic schemas + citations)
+- Hybrid retrieval (FTS + semantic)
+- Async processing (queue-based architecture)
+- Minimal review UI (human-in-the-loop)
+
+---
+
+## Project Objectives
+
+### Technical objective
 Demonstrate practical proficiency in:
 - Python backend development (FastAPI)
+- SQL for AI-enabled systems (PostgreSQL + migrations)
+- RAG primitives (chunking, embeddings, vector DB indexing)
 - Clean, scalable architecture
+- Best practices for regulated environments (auditability + evidence)
 
+### Professional objective
 Build a realistic portfolio project aligned with roles such as:
 - Python Developer (AI-enabled)
 - GenAI Engineer
 - Machine Learning Engineer (Applied)
 - Healthcare / Pharma Tech roles
 
+### Business objective (product vision)
 Simulate a system that:
 - Reduces manual document reading time
 - Minimizes human errors
+- Improves auditability (evidence-linked outputs)
 - Increases operational efficiency in healthcare

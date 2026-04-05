@@ -17,6 +17,96 @@ from app.services.weaviate_client import get_weaviate_client
 
 
 # -----------------------
+# JSON hardening (cheap)
+# -----------------------
+def _extract_json_candidate(text: str) -> str | None:
+    """
+    Best-effort extraction of a JSON object from a messy LLM response.
+    Cheap and deterministic.
+    """
+    if not text:
+        return None
+    s = text.strip()
+
+    # If response is already pure JSON
+    if s.startswith("{") and s.endswith("}"):
+        return s
+
+    # Try to find the first {...} block
+    start = s.find("{")
+    end = s.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        return s[start : end + 1].strip()
+
+    return None
+
+
+def _build_repair_prompt(schema_prompt: str, raw: str) -> str:
+    """
+    Ask the model to output valid JSON only.
+    Keep it short to reduce cost.
+    """
+    raw_short = (raw or "").strip()
+    if len(raw_short) > 3000:
+        raw_short = raw_short[:3000] + "\n...[truncated]..."
+
+    return f"""
+You previously returned an invalid response.
+
+Return JSON ONLY (no markdown, no commentary), matching the required schema exactly.
+
+{schema_prompt}
+
+Invalid response to fix:
+{raw_short}
+""".strip()
+
+
+def parse_llm_json_with_repair(llm: object, *, schema_prompt: str, raw: str) -> tuple[dict, list[str]]:
+    """
+    Unit-test friendly helper:
+    - tries to parse JSON from `raw`
+    - if invalid, makes ONE repair call: llm.invoke(repair_prompt).content
+    - returns (payload, warnings)
+    """
+    warnings: list[str] = []
+
+    candidate = _extract_json_candidate(raw) or (raw or "")
+    try:
+        payload = json.loads(candidate)
+        return payload, warnings
+    except Exception:
+        repair_prompt = _build_repair_prompt(schema_prompt=schema_prompt, raw=raw)
+        repaired = getattr(llm, "invoke")(repair_prompt).content
+
+        candidate = _extract_json_candidate(repaired) or (repaired or "")
+        payload = json.loads(candidate)
+
+        warnings.append("Model output was invalid JSON; auto-repaired successfully.")
+        return payload, warnings
+
+
+# -----------------------
+# Index presence check
+# -----------------------
+def is_document_indexed(document_id: str) -> bool:
+    """
+    Returns True if Weaviate has at least one DocumentChunk for the document_id.
+    Used by the agentic workflow for auto-remediation (index-if-missing).
+    """
+    client = get_weaviate_client()
+    try:
+        collection = client.collections.get("DocumentChunk")
+        res = collection.query.fetch_objects(
+            limit=1,
+            filters=Filter.by_property("document_id").equal(document_id),
+            return_properties=["document_id"],
+        )
+        return bool(res.objects)
+    finally:
+        client.close()
+
+# -----------------------
 # Patterns
 # -----------------------
 # Basic date token patterns

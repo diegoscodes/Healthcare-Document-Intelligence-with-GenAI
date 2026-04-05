@@ -1,11 +1,3 @@
-<p align="center">
-  <img src="Banner.png" alt=" /Healthcare-Document-Intelligence-with-GenAI" width="100%">
-</p>
-
-
-
-
-
 # Healthcare Document Intelligence with GenAI (MediRAG)
 
 MediRAG is a **Healthcare / Pharma Document Intelligence** system designed to ingest complex documents (e.g., Prior Authorizations, Pharmacy Agreements) and turn them into **structured, reliable, auditable data** using **GenAI + Retrieval-Augmented Generation (RAG)**.
