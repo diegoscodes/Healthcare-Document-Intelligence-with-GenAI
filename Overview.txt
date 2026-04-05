@@ -1,13 +1,8 @@
-Project Name MediRAG
-
 Healthcare Document Intelligence with GenAI
 
 From complex healthcare documents to structured, actionable data.
 
-For Healthcare + GenAI roles, MediRAG is the most balanced option.
 
-Project Overview
-What is MediRAG?
 MediRAG is a GenAI-based Document Intelligence system designed to process, understand, and structure complex healthcare and pharmaceutical documents such as:
 - Pharmacy Agreements
 - Prior Authorizations
@@ -15,58 +10,18 @@ MediRAG is a GenAI-based Document Intelligence system designed to process, under
 
 It combines Large Language Models (LLMs) with Retrieval-Augmented Generation (RAG) to transform unstructured documents (PDFs, long-form text) into structured, reliable, and auditable data.
 
-What the system does (functional scope)
-MediRAG runs an end-to-end production-style pipeline, including:
-- Document upload and ingestion (PDFs and complex long-form text)
-- Cleaning, chunking, and normalization
-- Semantic indexing
-- Embedding generation
-- Vector storage for efficient retrieval
-- RAG pipeline:
-  - Retrieves relevant passages from the document
-  - Sends controlled context to the LLM
-  - Reduces hallucination and improves accuracy
-- Structured extraction:
-  - Converts text into validated JSON
-  - Examples:
-    - Medication name
-    - Eligibility rules
-    - Dates, limits, approvals
-    - Clinical or administrative restrictions
-- SQL database persistence:
-  - Document history
-  - Metadata
-  - Extraction results
-  - Versioning
-- Professional backend API:
-  - Built with FastAPI
-  - Clear, documented endpoints
-  - Ready for integration with other systems
-- Simple React interface:
-  - Document viewing
-  - Human review of extracted data
-  - Human-in-the-loop feedback loop
 
-Project Objectives
-Technical objective
 Demonstrate practical proficiency in:
 - Python backend development (FastAPI)
-- SQL for AI-enabled systems
-- RAG pipelines
-- Prompt engineering for structured extraction
 - Clean, scalable architecture
-- Best practices for regulated environments
 
-Professional objective
 Build a realistic portfolio project aligned with roles such as:
 - Python Developer (AI-enabled)
 - GenAI Engineer
 - Machine Learning Engineer (Applied)
 - Healthcare / Pharma Tech roles
 
-Business objective (product vision)
 Simulate a system that:
 - Reduces manual document reading time
 - Minimizes human errors
-- Improves patient access to medication
 - Increases operational efficiency in healthcare
