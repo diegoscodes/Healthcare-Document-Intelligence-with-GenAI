@@ -2,7 +2,7 @@
   <img src="Banner.png" alt=" /Healthcare-Document-Intelligence-with-GenAI" width="100%">
 </p>
 
-https://github.com/diegoscodes/Healthcare-Document-Intelligence-with-GenAI/blob/main/Banner.png
+
 
 
 
