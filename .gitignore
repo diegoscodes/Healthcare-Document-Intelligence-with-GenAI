@@ -1,5 +1,28 @@
-# IDE
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+
+# Test/coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets
+.env
+*.env
+
+# Local generated data
+healthcare-genai-rag/data/uploads/
+
+# OS / IDE
 .idea/
+.DS_Store
 
 # local notes
 Status Snapshot .txt
+
+# local key/notes (keep secrets out of git)
+rag-key.txt

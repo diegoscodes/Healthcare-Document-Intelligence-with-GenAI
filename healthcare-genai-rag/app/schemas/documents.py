@@ -30,6 +30,13 @@ class DocumentProcessResponse(BaseModel):
     total_chars: int
 
 
+class DocumentIndexResponse(BaseModel):
+    document_id: str
+    status: str
+    chunks_indexed: int
+    pages_indexed: int
+
+
 class DocumentPageReadResponse(BaseModel):
     document_id: str
     page_number: int

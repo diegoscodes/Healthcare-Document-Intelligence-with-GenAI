@@ -3,9 +3,9 @@ services:
     image: postgres:16
     container_name: healthcare_genai_rag_db
     environment:
-      POSTGRES_DB: meditrag
-      POSTGRES_USER: meditrag_user
-      POSTGRES_PASSWORD: Parola37
+      POSTGRES_DB: ${POSTGRES_DB:-meditrag}
+      POSTGRES_USER: ${POSTGRES_USER:-meditrag_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-<DB_PASSWORD>}
     ports:
       - "5432:5432"
     volumes:
