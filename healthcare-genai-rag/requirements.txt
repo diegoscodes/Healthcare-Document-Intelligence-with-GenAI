@@ -12,6 +12,7 @@ pdfplumber
 langchain
 langchain-community
 langchain-openai
+langchain-text-splitters
 weaviate-client
 openai
 tiktoken
