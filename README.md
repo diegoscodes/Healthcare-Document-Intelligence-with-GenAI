@@ -1,270 +1,231 @@
+``` markdown
 # Healthcare Document Intelligence with GenAI (MediRAG)
 
-MediRAG is a **Healthcare / Pharma Document Intelligence** system designed to ingest complex documents (e.g., Prior Authorizations, Pharmacy Agreements) and turn them into **structured, reliable, auditable data** using **GenAI + Retrieval-Augmented Generation (RAG)**.
+MediRAG is a Healthcare / Pharma Document Intelligence system designed to ingest complex documents (e.g., Prior Authorizations, Pharmacy Agreements) and transform them into structured, reliable, and auditable data using GenAI + Retrieval-Augmented Generation (RAG).
 
-> Current status: Backend MVP is working (API + DB + migrations + PDF upload + processing + pages API + inline view/download).
-
----
-
-## Business problem (why this exists)
-Reviewing Prior Authorization / Pharmacy documents is slow and error-prone. Teams spend significant time reading PDFs, extracting fields manually, and justifying decisions.
-
-This project aims to reduce review time and increase auditability by:
-- extracting text per page,
-- storing evidence (pages now, chunks next),
-- enabling structured extraction with traceable citations,
-- providing a UI for human review and fallback when AI fails.
-
-## ROI (what we measure)
-Define baseline and track improvements over time:
-- **Time-to-review (TTR)** per document (minutes)
-- **Docs/day per reviewer** (throughput)
-- **Field-level correction rate** (quality)
-- **Evidence coverage** (% extracted fields linked to page/chunk) — target 100%
-- **Operational metrics** (p95 latency, failure rate)
-
-## Operational risks & contingency (AI failure modes)
-- Parsing failures (scanned PDFs, corrupted files) → manual review mode + clear errors.
-- Large documents → pagination + payload controls.
-- AI downtime/low quality → fallback layers:
-  - keyword search (FTS) and manual review UI
-  - retries / queue for async jobs (planned)
-  - circuit breaker to disable AI features (planned)
+> Status: Backend MVP is fully functional (API + DB + migrations + PDF ingestion + page-level processing + vector indexing + agentic QA + testing). The system is evolving into a production-grade Agentic Workflow architecture.
 
 ---
 
-## What this project does (today)
+## Business Problem (Why This Exists)
+
+Reviewing Prior Authorization and Pharmacy documents is slow, manual, and error-prone. Teams spend significant time reading PDFs, extracting key fields, and justifying decisions for compliance.
+
+This system addresses that by:
+- Extracting structured data from unstructured documents
+- Preserving traceable evidence (page-level + chunk-level)
+- Enabling grounded AI responses with citations
+- Supporting audit-ready decision workflows
+
+---
+
+## Key Value Proposition
+
+- Reduce manual review time
+- Increase extraction accuracy
+- Provide full traceability for every decision
+- Enable scalable document intelligence pipelines in healthcare/pharma
+
+---
+
+## ROI Metrics
+
+- Time-to-review (TTR) per document (minutes)
+- Documents processed per day per reviewer
+- Field-level correction rate
+- Evidence coverage (target: 100%)
+- System metrics (p95 latency, failure rate)
+
+---
+
+## System Architecture (High-Level)
+
+The system follows an Agentic RAG Workflow:
+
+1. Ingestion Layer
+   - PDF upload and storage
+2. Processing Layer
+   - Page-level text extraction
+   - Structured persistence in database
+3. Indexing Layer
+   - Embedding generation
+   - Storage in vector database (Weaviate)
+4. Retrieval Layer
+   - Semantic search with top-k ranking
+5. Agentic Reasoning Layer
+   - Planner → Retriever → Verifier workflow
+   - Multi-query generation
+   - Grounded response validation
+6. Output Layer
+   - Structured JSON responses
+   - Citations + reasoning trace
+   - Audit-ready outputs
+
+---
+
+## Core Features
 
 ### Backend API (FastAPI)
-- OpenAPI/Swagger docs:
-  - `GET /docs`
-- Health check:
-  - `GET /health`
+- OpenAPI docs: `GET /docs`
+- Health checks: `GET /health`, `GET /rag/health`
 
 ### Database (PostgreSQL + SQLAlchemy)
-- PostgreSQL via Docker Compose
-- SQLAlchemy ORM models
+- ORM-based persistence
 - Alembic migrations
+- Page-level document storage
 
-### Document upload, processing & evidence (pages)
-- Upload a PDF:
-  - `POST /documents` (multipart/form-data)
-- File is persisted to disk at:
-  - `data/uploads/<document_id>/original.pdf`
-- Process a document (extract text per page and persist to DB):
-  - `POST /documents/{document_id}/process`
-- List pages (supports pagination and optional text):
-  - `GET /documents/{document_id}/pages?include_text=false&limit=50&offset=0`
-- Read a single page:
+### Document Processing
+- Upload: `POST /documents`
+- Processing: `POST /documents/{document_id}/process`
+- Page retrieval:
+  - `GET /documents/{document_id}/pages`
   - `GET /documents/{document_id}/pages/{page_number}`
 
-### Document serving (inline and download)
-- Read document metadata:
-  - `GET /documents/{document_id}`
-- Open inline:
-  - `GET /documents/{document_id}/file`
-- Force download:
-  - `GET /documents/{document_id}/file/download`
+### Vector Indexing (Weaviate)
+- `POST /documents/{document_id}/index`
+- Stores semantic chunks for retrieval (Weaviate collection: `DocumentChunk`)
+
+### Agentic RAG QA
+- `POST /rag/answer`
+- Features:
+  - Multi-query planning
+  - Semantic retrieval (top-k)
+  - Groundedness verification
+  - Step-by-step trace (`steps`)
+  - Citation-based answers
+  - Evaluation mode (`allow_insufficient=false`) to disallow refusal answers
+
+### Structured Extraction
+- `POST /rag/extract`
+- Schema-driven output
+- Automatic indexing remediation (index-if-missing)
 
 ---
 
-## Quickstart (local development)
+## AI Reliability & Risk Handling
 
-
-## 🛠️ Local Setup Guide
-
-### 1️⃣ Start PostgreSQL (Docker)
-
-From the project root:
-
-```bash
-cd healthcare-genai-rag
-docker compose up -d
-```
-
-Verify container:
-
-```bash
-docker ps
-```
+- Parsing failures → fallback to manual review
+- Large documents → pagination controls
+- AI degradation → fallback strategies (planned):
+  - Keyword search (FTS)
+  - Async processing queues
+  - Circuit breaker for AI modules
 
 ---
 
-### 2️⃣ Configure Environment Variables
+## Local Setup Guide
 
+### 1. Start PostgreSQL
+```
+
+bash cd healthcare-genai-rag docker compose up -d docker ps``` 
+
+### 2. Configure Environment Variables
 Create a `.env` file in:
+```
 
-```
-healthcare-genai-rag/.env
-```
+healthcare-genai-rag/.env``` 
 
 Example:
-
-```env
-DATABASE_URL=postgresql+psycopg://<DB_USER>:<DB_PASSWORD>@127.0.0.1:5432/<DB_NAME>
 ```
 
-Replace:
-- `postgres` → DB user  
-- `postgres` → DB password  
-- `healthcare_db` → Database name  
+env DATABASE_URL=postgresql+psycopg://<DB_USER>:<DB_PASSWORD>@127.0.0.1:5432/<DB_NAME>
+OPENAI_API_KEY=<YOUR_OPENAI_KEY> OPENAI_MODEL=<CHAT_MODEL_NAME> OPENAI_EMBEDDINGS_MODEL=<EMBEDDINGS_MODEL_NAME>
+WEAVIATE_URL=<WEAVIATE_CLUSTER_URL> WEAVIATE_API_KEY=<WEAVIATE_API_KEY>``` 
 
-Values must match your `docker-compose.yml`.
-
----
-
-### 3️⃣ Install Dependencies
-
+### 3. Install Dependencies
 Activate virtual environment:
 
 **Windows**
-```bash
-.venv\Scripts\activate
 ```
+
+bash .venv\Scripts\activate``` 
 
 **Mac/Linux**
-```bash
-source .venv/bin/activate
 ```
 
-Install dependencies:
+bash source .venv/bin/activate``` 
 
-```bash
-pip install -r requirements.txt
+Install:
 ```
 
----
+bash pip install -r requirements.txt``` 
 
-### 4️⃣ Run Database Migrations (Alembic)
-
-Ensure:
-- PostgreSQL container is running
-- `.env` is correctly configured
-
-Run:
-
-```bash
-alembic upgrade head
+### 4. Run Migrations
 ```
 
----
+bash alembic upgrade head``` 
 
-### 5️⃣ Run the API
-
-Since `main.py` is inside `app/`, run:
-
-```bash
-uvicorn app.main:app --reload
+### 5. Start API
 ```
 
-Or:
-
-```bash
-python -m uvicorn app.main:app --reload
-```
-
----
-
-## 🌐 Access the API
+bash python -m uvicorn app.main:app --reload``` 
 
 Swagger UI:
+```
 
-```
-http://127.0.0.1:8000/docs
-```
+http://127.0.0.1:8000/docs``` 
 
 ---
 
-# 🧪 Manual API Testing (Swagger)
+## Testing
+```
 
-### 1. Upload Document
-`POST /documents`
-
-- Upload a PDF
-- Copy returned `document_id`
+bash pytest -q``` 
 
 ---
 
-### 2. Process Document
-`POST /documents/{document_id}/process`
+## Example Usage
 
-Expected:
-```json
-{
-  "status": "parsed"
-}
+### Upload → Process → Index
 ```
+
+text POST /documents POST /documents/{document_id}/process POST /documents/{document_id}/index``` 
+
+### Agentic QA example
+```
+
+json { "document_id": "<DOCUMENT_ID>", "question": "What is the decision and the rationale?", "top_k": 8, "retries": 1 }``` 
+
+### Evaluation mode
+Use `allow_insufficient=false` to disallow `"Insufficient evidence."` responses (useful for evaluation/testing).
+```
+
+json { "document_id": "<DOCUMENT_ID>", "question": "Confirm the decision is denied and justify the rationale.", "top_k": 8, "retries": 0, "allow_insufficient": false }``` 
 
 ---
 
-### 3. Retrieve Pages
-`GET /documents/{document_id}/pages`
+## Security Best Practices
 
-Example query params:
-
-```
-include_text=false
-limit=1
-offset=0
-```
+- Never commit `.env` files
+- Avoid real healthcare data in local environments
+- Rotate API keys regularly
 
 ---
 
-### 4. View File
-`GET /documents/{document_id}/file`
+## Roadmap
 
-Inline preview.
-
----
-
-### 5. Download File
-`GET /documents/{document_id}/file/download`
-
----
-
-# 📄 Sample PDF Generator (Optional)
-
-Generate a test PDF:
-
-```bash
-python data/samples/generate_sample_pdf.py
-```
-
-Output:
-
-```
-data/samples/sample_prior_authorization.pdf
-```
-
----
-
-# 🧭 Roadmap
-
-## MVP
-- Page-based chunking with audit-friendly metadata
-- PostgreSQL Full-Text Search (FTS)
-- Structured extraction with Pydantic validation
-- Minimal review UI
-
-## Scale
-- `pgvector` embeddings
 - Hybrid retrieval (FTS + semantic)
-- Async processing (queue-based architecture)
-- Observability (structured logs, metrics)
-- CI testing (unit + integration)
+- Async pipeline (queue-based architecture)
+- Observability (logs, metrics, tracing)
+- Human-in-the-loop review UI
+- Full Agentic Workflow orchestration layer
 
 ---
 
-# 🔐 Security Notes
+## Why This Project Matters (For Recruiters)
 
-- Do **NOT** commit `.env` files
-- Avoid real sensitive healthcare data locally
-- Rotate secrets regularly
+This project demonstrates:
+- Real-world GenAI application in healthcare
+- End-to-end RAG system design
+- Agentic workflow implementation (planner/retriever/verifier + evaluation mode)
+- Production-ready backend engineering (FastAPI, DB, migrations)
+- Focus on reliability, auditability, and scalability
 
 ---
 
-# 📌 Technical Notes
+## Git Workflow
+```
 
-- PDF text extraction uses **pdfplumber**
-- Works best with text-based PDFs
-- Scanned PDFs require OCR (e.g., Tesseract)
+bash git status git add README.md Overview.txt healthcare-genai-rag/app healthcare-genai-
+rag/tests healthcare-genai-rag/requirements.txt git commit -m "Add agentic RAG workflow with evaluation mode and production structure" git push

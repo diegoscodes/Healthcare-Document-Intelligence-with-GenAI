@@ -2,7 +2,7 @@ Project Name: MediRAG
 
 Healthcare Document Intelligence with GenAI
 
-From complex healthcare documents to structured, actionable data.
+From complex healthcare documents to structured, actionable, auditable data.
 
 ---
 
@@ -24,12 +24,16 @@ Implemented and working today:
 - PostgreSQL persistence (SQLAlchemy + Alembic migrations)
 - PDF upload + file persistence
 - Per-page text extraction and storage (evidence layer)
-- Page listing and single-page retrieval
 - Document serving (inline preview + download)
-- Semantic indexing to Weaviate:
-  - split pages into chunks
-  - generate embeddings
-  - store vectors + metadata for retrieval
+- Semantic chunk indexing to Weaviate (DocumentChunk collection)
+- Agentic QA endpoint with an explicit workflow:
+  - Planner (multi-query strategy)
+  - Retriever (Weaviate vector search + metadata filtering by document_id)
+  - Generator (LLM returning structured JSON: answer + citations)
+  - Verifier (groundedness checks + citation validation)
+  - Trace steps returned for audit/debug
+  - Evaluation mode: allow_insufficient=false to disallow refusal responses
+- Automated tests for verifier behavior (groundedness + eval mode)
 
 ---
 
@@ -40,14 +44,16 @@ Implemented and working today:
 - Page-level parsing (evidence)
 - Chunking + embedding generation for indexing
 - Vector storage (Weaviate Cloud)
-- Backend API ready for integration
+- Agentic QA: citations + verification + trace
+- Structured extraction endpoint (/rag/extract) with auto-index remediation
+- Tests (pytest)
 
 ### Planned / Next
-- RAG question-answering endpoint using retrieved chunks
-- Structured extraction to validated JSON (Pydantic schemas + citations)
 - Hybrid retrieval (FTS + semantic)
 - Async processing (queue-based architecture)
+- Observability (structured logs, metrics, tracing)
 - Minimal review UI (human-in-the-loop)
+- More robust tool selection (dynamic planning) and fallback routing
 
 ---
 
@@ -58,19 +64,18 @@ Demonstrate practical proficiency in:
 - Python backend development (FastAPI)
 - SQL for AI-enabled systems (PostgreSQL + migrations)
 - RAG primitives (chunking, embeddings, vector DB indexing)
-- Clean, scalable architecture
+- Agentic workflow design (planner/retriever/verifier + eval)
 - Best practices for regulated environments (auditability + evidence)
 
 ### Professional objective
 Build a realistic portfolio project aligned with roles such as:
-- Python Developer (AI-enabled)
+- AI Developer (Agentic workflows + RAG + production APIs)
 - GenAI Engineer
 - Machine Learning Engineer (Applied)
-- Healthcare / Pharma Tech roles
 
 ### Business objective (product vision)
 Simulate a system that:
 - Reduces manual document reading time
 - Minimizes human errors
-- Improves auditability (evidence-linked outputs)
+- Improves auditability (evidence-linked outputs + citations)
 - Increases operational efficiency in healthcare
