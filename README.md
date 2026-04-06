@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="Banner.png" alt=" Healthcare-Document-Intelligence-with-GenAI" width="100%">
+</p>
 ``` markdown
 # Healthcare Document Intelligence with GenAI (MediRAG)
 
